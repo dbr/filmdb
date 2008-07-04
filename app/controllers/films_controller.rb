@@ -9,7 +9,6 @@ class FilmsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.text # index.txt.erb
-      format.xml  { render :xml => @films }
     end
   end
 
@@ -21,20 +20,10 @@ class FilmsController < ApplicationController
       redirect_to :action => "index"
       return
     end
-    
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @film }
-    end
   end
 
   def new
     @film = Film.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @film }
-    end
   end
 
   def edit
@@ -47,11 +36,9 @@ class FilmsController < ApplicationController
     respond_to do |format|
       if @film.save
         flash[:notice] = 'Film was successfully created.'
-        format.html { redirect_to(@film) }
-        format.xml  { render :xml => @film, :status => :created, :location => @film }
+        redirect_to(@film)
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @film.errors, :status => :unprocessable_entity }
+        render :action => "new"
       end
     end
   end
@@ -62,11 +49,9 @@ class FilmsController < ApplicationController
     respond_to do |format|
       if @film.update_attributes(params[:film])
         flash[:notice] = 'Film was successfully updated.'
-        format.html { redirect_to(@film) }
-        format.xml  { head :ok }
+        redirect_to(@film)
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @film.errors, :status => :unprocessable_entity }
+        render :action => "edit"
       end
     end
   end
@@ -75,10 +60,7 @@ class FilmsController < ApplicationController
     @film = Film.find(params[:id])
     @film.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(films_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to(films_url)
   end
 
   protected
