@@ -1,0 +1,23 @@
+<h1>Listing films</h1>
+<% form_tag films_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+<table>
+<% for film in @films %>
+  <tr class="<%= cycle("odd", "even")%>">
+    <td><%=h film.title %></td>
+    <td><%= link_to 'Review', film %></td>
+    <td><%= make_imdb_link(film.imdb_id) %></td>
+    <td><%= link_to 'Edit', edit_film_path(film) %></td>
+    <td><%= link_to 'Destroy', film, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New film', new_film_path %>

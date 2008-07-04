@@ -1,0 +1,23 @@
+<div id="title">
+  <h2>
+    <%= link_to(@film.title, @film.imdb_link) %>
+  </h2>
+</div>
+
+<%= link_to ('< Back', films_path) %> |
+<%= link_to 'Edit', edit_film_path(@film) %>
+
+<div id="review-title">
+  <h3>
+    Review:
+  </h3>
+</div>
+
+<div id="review">
+  <%=h @film.review %>
+</div>
+
+<p>
+  <%= link_to ('< Back', films_path) %> |
+  <%= link_to 'Edit', edit_film_path(@film) %>
+</p>
