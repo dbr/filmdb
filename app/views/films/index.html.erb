@@ -1,7 +1,12 @@
 <h1>Listing films</h1>
-<% form_tag films_path, :method => 'get' do %>
+
+<% form_tag films_path, :method=>:get do %>
   <p>
-    <%= text_field_tag :search, params[:search] %>
+    <%= text_field_with_auto_complete :film, :search, 
+    {:size => 10}, 
+    {:url => formatted_films_path(:js), 
+     :method => :get, 
+     :with => "Object.toQueryString({search: element.value})"} %>
     <%= submit_tag "Search", :name => nil %>
   </p>
 <% end %>

@@ -1,20 +1,22 @@
 class FilmsController < ApplicationController
+  auto_complete_for :film, :title
   # Require auth for everything except /films/ and /films/2
   before_filter :authenticate, :except => [:index, :show]
 
   def index
     @films = Film.search(params[:search])
-    # @films = Film.find(:all)
 
     respond_to do |format|
       format.html # index.html.erb
+      format.js # index.js
       format.text # index.txt.erb
+      format.xml { render :xml => @films.to_xml }
     end
   end
 
   def show
     begin
-      @film = Film.find(params[:id])
+      @film = Film.find_by_permalink(params[:id])
     rescue ActiveRecord::RecordNotFound
       flash[:error] = "Unknown id..."
       redirect_to :action => "index"
@@ -27,37 +29,33 @@ class FilmsController < ApplicationController
   end
 
   def edit
-    @film = Film.find(params[:id])
+    @film = Film.find_by_permalink(params[:id])
   end
 
   def create
     @film = Film.new(params[:film])
 
-    respond_to do |format|
-      if @film.save
-        flash[:notice] = 'Film was successfully created.'
-        redirect_to(@film)
-      else
-        render :action => "new"
-      end
+    if @film.save
+      flash[:notice] = 'Film was successfully created.'
+      redirect_to(@film)
+    else
+      render :action => "new"
     end
   end
 
   def update
-    @film = Film.find(params[:id])
+    @film = Film.find_by_permalink(params[:id])
 
-    respond_to do |format|
       if @film.update_attributes(params[:film])
         flash[:notice] = 'Film was successfully updated.'
         redirect_to(@film)
       else
         render :action => "edit"
       end
-    end
   end
 
   def destroy
-    @film = Film.find(params[:id])
+    @film = Film.find_by_permalink(params[:id])
     @film.destroy
 
     redirect_to(films_url)
