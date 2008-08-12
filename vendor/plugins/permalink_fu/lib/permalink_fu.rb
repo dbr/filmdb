@@ -15,7 +15,7 @@ module PermalinkFu
       s.gsub!(/\W+/, ' ') # all non-word chars to spaces
       s.strip!            # ohh la la
       s.downcase!         #
-      s.gsub!(/\ +/, '-') # spaces to dashes, preferred separator char everywhere
+      s.gsub!(/\ +/, '_') # spaces to dashes, preferred separator char everywhere
       s
     end
   end
