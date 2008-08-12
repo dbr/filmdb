@@ -1,9 +1,11 @@
 <h1>Listing films</h1>
 
+<%= link_to 'New film', new_film_path %>
+
 <% form_tag films_path, :method=>:get do %>
   <p>
     <%= text_field_with_auto_complete :film, :search, 
-    {:size => 10}, 
+    {:size => 20}, 
     {:url => formatted_films_path(:js), 
      :method => :get, 
      :with => "Object.toQueryString({search: element.value})"} %>
