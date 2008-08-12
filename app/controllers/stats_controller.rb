@@ -1,12 +1,7 @@
 class StatsController < ApplicationController
   def index
-    @all_films = Film.find(:all)
-    @total = @all_films.length
-    
-    @noimdb=[]
-    @all_films.each do |t|
-      @noimdb << t.imdb_id if t.imdb_id.empty?
-    end
-    @without_imdb = @noimdb.length
+    @total = Film.find(:all).length
+    @without_imdb = Film.no_imdb.length
+    @per_complete = 100 - ((@without_imdb / @total.to_f) * 100).round(2)
   end
 end
