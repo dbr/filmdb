@@ -1,3 +1,5 @@
 <% for film in @films %>
-<%=h film.title %>|<%= film.imdb_id %>|<%=h film.review %>
+<%=h film.title %> (<%= film.imdb_id %>)
+<%=h film.review %>
+------------------------
 <% end %>
