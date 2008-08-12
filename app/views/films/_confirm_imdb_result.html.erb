@@ -1,0 +1,13 @@
+<% if @imdb_data.nil? %>
+Cannot find film on IMDB!
+<% else %>
+<h2>Is this the correct film?</h2>
+<h3><%= link_to @imdb_data.title %></h3>
+<p>Tagline: <%= @imdb_data.tagline %></p>
+<p>Released on: <%= @imdb_data.release_date.to_s(:long) %></p>
+<p>Plot: <%= @imdb_data.plot %></p>
+
+<p><%= link_to "Yes", :imdb_id_correct => 'true' %> | <%= link_to "No" %></p>
+
+<%= link_to "< Back", @film %>
+<% end %>
