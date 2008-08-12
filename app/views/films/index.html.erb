@@ -25,4 +25,9 @@
 
 <br />
 
-<%= link_to 'New film', new_film_path %>
+<pre id="stats">
+  <h2>Stats</h2>
+  Number of films: <%= num_all %><br />
+  Without IMDB id: <%= num_without_imdb %><br />
+  IMDB ID completion: <%= imdb_id_completion %>%
+</pre>
