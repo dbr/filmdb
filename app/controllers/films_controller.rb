@@ -13,7 +13,7 @@ class FilmsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.js # index.js
-      format.text # index.txt.erb
+      format.text # index.txt.erb
       format.xml { render :xml => @films.to_xml }
     end
   end
