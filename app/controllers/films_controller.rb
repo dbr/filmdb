@@ -14,6 +14,7 @@ class FilmsController < ApplicationController
       format.html # index.html.erb
       format.js # index.js
       format.text # index.txt.erb
+      format.yaml { render :text => @films.to_yaml }
       format.xml { render :xml => @films.to_xml }
     end
   end
@@ -37,7 +38,7 @@ class FilmsController < ApplicationController
       end
     rescue ActiveRecord::RecordNotFound
       flash[:error] = "Unknown film..."
-      redirect_to :action => "index"
+      redirect_to :action => "index", :status => '404 Not Found'
       return
     end
   end
