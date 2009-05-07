@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.root :controller => "welcome"
+  map.root :controller => "films"
   map.resources :films
 
   # The priority is based upon order of creation: first created -> highest priority.
