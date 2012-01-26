@@ -21,7 +21,7 @@ class FilmsController < ApplicationController
 
   def show
     begin
-      @film = Film.find_by_permalink(params[:id])
+      @film = Film.find_by_imdb_id(params[:id])
       raise ActiveRecord::RecordNotFound, "Film not found" if @film.nil?
       
       if params[:imdb_id_check]
@@ -48,7 +48,7 @@ class FilmsController < ApplicationController
   end
 
   def edit
-    @film = Film.find_by_permalink(params[:id])
+    @film = Film.find_by_imdb_id(params[:id])
   end
 
   def create
@@ -63,7 +63,7 @@ class FilmsController < ApplicationController
   end
 
   def update
-    @film = Film.find_by_permalink(params[:id])
+    @film = Film.find_by_imdb_id(params[:id])
 
       if @film.update_attributes(params[:film])
         flash[:notice] = 'Film was successfully updated.'
@@ -74,7 +74,7 @@ class FilmsController < ApplicationController
   end
 
   def destroy
-    @film = Film.find_by_permalink(params[:id])
+    @film = Film.find_by_imdb_id(params[:id])
     @film.destroy
 
     redirect_to(films_url)
